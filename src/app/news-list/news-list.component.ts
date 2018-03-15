@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NewsService} from '../news.service';
+import { NewsService } from '../news.service';
 
 @Component({
   selector: 'app-news-list',
@@ -7,14 +7,28 @@ import {NewsService} from '../news.service';
   styleUrls: ['./news-list.component.css']
 })
 export class NewsListComponent implements OnInit {
-	images: any[];
+	news: any[];
+  newsFound: boolean = false;
+
+  handleSuccess(data){
+    this.newsFound = true;
+    this.news = data.articles;
+    console.log(data.articles);
+  }
+
+  handleError(error){
+    console.log(error);
+  }
+
+
 
   constructor(private _newsService : NewsService) { }
 
   searchNews(query: string){
+    debugger
   	return this._newsService.getNews(query).subscribe(
-  			data => console.log(data),
-  			error => console.log(error),
+  			data => this.handleSuccess(data),
+  			error => this.handleError(error),
   			() => console.log("good job!!")
   		)
   }

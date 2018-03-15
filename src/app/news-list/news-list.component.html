@@ -1,1 +1,11 @@
-<button (click)="searchNews('usa')">Find News</button>
+<input class="search" [(ngModel)]="searchQuery" placeholder="Search for News">
+<button (click)="searchNews(searchQuery)" type="button">Find News</button>
+<!--<input #text id="text"/>
+<button (click)="searchNews(text.value)" > search</button>-->
+<div *ngFor="let new of news" class=new-container>
+	<p>Title: {{ new.title}}</p>
+	<p>Author: {{ new.author}}</p>
+	<p>Description: {{ new.description}}</p>
+	<!--<p>Url: {{ new.description}}</p>-->
+
+</div>	
